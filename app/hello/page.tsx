@@ -1,19 +1,21 @@
 'use client';
 
+import axios from "axios";
 import { useEffect, useState } from "react";
 
 export default function Page() {
-    const [state, setState] = useState(0);
+    const [state, setState] = useState('');
 
     useEffect(() => {
-        setState(1);
-        console.log('Start!');
+        axios.get('/api/hello')
+            .then(res => res.data)
+            .then(data => {
+                setState(data.name);
+                console.log('Fetch!');
+            });
     }, []);
 
     return (
-        <>
-            <div>Count: {state}</div>
-            <button onClick={() => setState(state + 1)}>Increment</button>
-        </>
+        <div>hello {state}!</div>
     );
 }
