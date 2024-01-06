@@ -7,12 +7,17 @@ export default function Page() {
     const [state, setState] = useState('');
 
     useEffect(() => {
-        axios.get('/api/hello')
-            .then(res => res.data)
-            .then(data => {
-                setState(data.name);
-                console.log('Fetch!');
-            });
+        async function fetchData() {
+            axios.get('/api/hello_db/backend/')
+                .then(res => res.data)
+                .then(data => {
+                    setState(data.message);
+                    console.log('Set!');
+                });
+        }
+        return () => {
+            fetchData();
+        }
     }, []);
 
     return (

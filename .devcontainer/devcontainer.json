@@ -4,5 +4,6 @@
 	"build": {
 		"dockerfile": "Dockerfile"
 	},
-  "remoteUser": "node"
+  	"remoteUser": "node",
+	// "runArgs": ["--add-host=host.docker.internal:host-gateway"]
 }
