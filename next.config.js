@@ -5,6 +5,7 @@ const nextConfig = {
         // host.docker.internalはDockerコンテナからホストのローカルネットワークにアクセスするための特殊なホスト名
         return [
             {
+                permanent: true,
                 source: '/api/:path*',
                 destination: 'http://host.docker.internal:8000/api/:path*',
             },
