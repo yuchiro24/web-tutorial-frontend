@@ -37,11 +37,20 @@ export default function Page() {
         const name = event.target.name;
         setBookForm({ ...bookForm, [name]: value });
     }
+    const resetBookForm = () => {
+        setBookForm({
+            id: null,
+            title: '',
+            author: '',
+            description: ''
+        });
+    }
 
     // 新規登録処理
     const [showNewBookForm, setShowNewBookForm] = useState(false);
     const handleNewBookForm = (event: React.MouseEvent<HTMLElement>) => {
         event.preventDefault();
+        resetBookForm();
         setShowNewBookForm(true);
     }
     const handleCanselNewBookForm = (event: React.MouseEvent<HTMLElement>) => {
@@ -86,15 +95,15 @@ export default function Page() {
                 <form>
                     <div>
                         <label>タイトル</label>
-                        <input type="text" />
+                        <input type="text" value={bookForm.title} name="title" onChange={handleInput} />
                     </div>
                     <div>
                         <label>著者</label>
-                        <input type="text" />
+                        <input type="text" value={bookForm.author} name="author" onChange={handleInput}/>
                     </div>
                     <div>
                         <label>説明</label>
-                        <textarea></textarea>
+                        <textarea value={bookForm.description} name="description" onChange={handleInput}></textarea>
                     </div>
                     <div>
                         <button onClick={handleCreateNewBook}>登録</button>
