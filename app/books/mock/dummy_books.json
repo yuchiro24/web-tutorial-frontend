@@ -1,0 +1,20 @@
+[
+    {
+        "id": 1,
+        "title": "テスト本1",
+        "author": "テスト著者1",
+        "description": "テスト説明1"
+    },
+    {
+        "id": 2,
+        "title": "テスト本2",
+        "author": "テスト著者2",
+        "description": "テスト説明2"
+    },
+    {
+        "id": 3,
+        "title": "テスト本3",
+        "author": "テスト著者3",
+        "description": "テスト説明3"
+    }
+]
