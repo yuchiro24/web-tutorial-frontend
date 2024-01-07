@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import booksData from "./mock/dummy_books.json";
 import Link from "next/link";
 
@@ -11,7 +11,7 @@ type Book = {
     description: string
 };
 
-// [Desc] 本一覧画面
+// 本一覧画面
 export default function Page() {
     const [books, setBooks] = useState<Book[]>([]);
 
@@ -19,10 +19,47 @@ export default function Page() {
         return setBooks(booksData);
     }, []);
 
+    // 新規登録処理
+    const [showNewBookForm, setShowNewBookForm] = useState(false);
+    const handleNewBookForm = (event: React.MouseEvent<HTMLElement>) => {
+        event.preventDefault();
+        setShowNewBookForm(true);
+    }
+    const handleCanselNewBookForm = (event: React.MouseEvent<HTMLElement>) => {
+        event.preventDefault();
+        setShowNewBookForm(false);
+    }
+    const handleCreateNewBook = (event: React.MouseEvent<HTMLElement>) => {
+        event.preventDefault();
+        // TODO: 本の新規登録処理
+        setShowNewBookForm(false);
+    }
+
     return(
         <>
             <h2>本一覧</h2>
-            <button>本を追加する</button>
+            <button onClick={ handleNewBookForm }>本を追加する</button>
+            {showNewBookForm ? (
+                <form>
+                    <div>
+                        <label>タイトル</label>
+                        <input type="text" />
+                    </div>
+                    <div>
+                        <label>著者</label>
+                        <input type="text" />
+                    </div>
+                    <div>
+                        <label>説明</label>
+                        <textarea></textarea>
+                    </div>
+                    <div>
+                        <button onClick={ handleCreateNewBook }>登録</button>
+                        <button onClick={ handleCanselNewBookForm }>キャンセル</button>
+                    </div>
+                </form>
+            ): null}
+
             <table>
                 <thead>
                     <tr>
@@ -39,7 +76,7 @@ export default function Page() {
                             <td>{book.author}</td>
                             <td>{book.description}</td>
                             <td>
-                                <button>更新・削除</button>
+                                <button>編集・削除</button>
                             </td>
                         </tr>
                     ))}
