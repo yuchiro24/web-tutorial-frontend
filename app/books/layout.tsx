@@ -1,6 +1,6 @@
 'use client';
 import { useState } from "react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import {
     AppBar,
     Box,
@@ -47,12 +47,12 @@ export default function BooksLayout({ children }: { children: React.ReactNode })
     const [isNavbarOpened, setIsNavbarOpened] = useState<boolean>(false);
     const toggleNavbar = () => setIsNavbarOpened(!isNavbarOpened);
 
-    //const router = useRouter();
+    const router = useRouter();
 
     const handleLogout = () => {
-        console.log('logout');
         // TODO: ログアウト処理
-        //router.push('/login');
+        console.log('logout');
+        router.push('/login');
     };
 
     // サイドバー
@@ -62,7 +62,9 @@ export default function BooksLayout({ children }: { children: React.ReactNode })
             onClick={() => toggleNavbar()}
             onKeyDown={() => toggleNavbar()}
         >
-            <Toolbar />
+            <Toolbar>
+                <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>メニュー</Typography>
+            </Toolbar>
             <Divider />
             <List>
                 <ListItem disablePadding component="a" href="/books">

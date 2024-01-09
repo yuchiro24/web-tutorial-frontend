@@ -6,6 +6,7 @@ import booksData from "./mock/dummy_books.json";
 import Link from "next/link";
 import { Alert, AlertColor, Box, Button, Paper, Snackbar, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
 import { Add } from "@mui/icons-material";
+import { useRouter } from "next/navigation";
 
 type Book = {
     id: number | null
@@ -32,6 +33,8 @@ export default function Page() {
     const handleClose = () => {
         setisSnackbarOpened(false);
     }
+
+    const router = useRouter();
 
     // フォームのバリデーション
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
