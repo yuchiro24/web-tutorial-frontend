@@ -56,8 +56,7 @@ export default function Page({ params }: { params: { id: number } }) {
             <Snackbar open={isSnackbarOpened} autoHideDuration={3000} onClose={() => setIsSnackbarOpened(false)}>
                 <Alert severity={severity} sx={{ width: '100%' }}>{message}</Alert>
             </Snackbar>
-            <Typography variant="h4">本詳細</Typography>
-            <Typography variant="h6">タイトル: {book?.title}</Typography>
+            <Typography variant="h4">書籍詳細</Typography>
             
             <Table>
                 <TableHead>

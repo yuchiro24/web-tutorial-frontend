@@ -69,7 +69,7 @@ export default function BooksLayout({ children }: { children: React.ReactNode })
             <List>
                 <ListItem disablePadding component="a" href="/books">
                     <ListItemButton>
-                        <ListItemText primary="本一覧" />
+                        <ListItemText primary="書籍一覧" />
                     </ListItemButton>
                 </ListItem>
                 <ListItem disablePadding component="a" href="/books/import">

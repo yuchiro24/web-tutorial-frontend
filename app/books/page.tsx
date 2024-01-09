@@ -15,7 +15,7 @@ type Book = {
     description: string
 };
 
-// 本一覧画面
+// 書籍一覧画面
 export default function Page() {
     const [books, setBooks] = useState<Book[]>([]);
     const [editingBookId, setEditingBookId] = useState<number | null>(null);
@@ -138,7 +138,7 @@ export default function Page() {
                     {message}
                 </Alert>
             </Snackbar>
-            <Typography variant="h4">本一覧</Typography>
+            <Typography variant="h4">書籍一覧</Typography>
             <Button variant="contained" startIcon={<Add />} onClick={() => handleCreateNewBook()}>本を追加する</Button>
             <Box component="form" onSubmit={handleSubmit(onSubmit)} sx={{ height: 400, width: "100%" }}>
                 <TableContainer component={Paper}>
