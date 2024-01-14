@@ -3,6 +3,8 @@
 import { Box, Button, CssBaseline, Divider, TextField, ThemeProvider, Typography, createTheme } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import { useState } from "react";
+import axios from "axios";
 
 type FormData = {
     username: string
@@ -12,13 +14,25 @@ type FormData = {
 // ログイン画面
 export default function Page() {
     const { register, handleSubmit, formState: { errors } } = useForm();
+    const [authError, setAuthError] = useState("");
     const router = useRouter();
     const defaultTheme = createTheme();
 
     const handleLogin = (data: FormData) => {
-        // TODO: ログイン処理
-        console.log("login");
-        router.push("/books")
+        axios.post("/api/books/login/", data)
+        .then((res) => {
+            console.log(res.data);
+            if (res.data.error) {
+                setAuthError(res.data.error);
+            } else {
+                setAuthError("");
+                router.push("/books");
+            }
+        }
+        ).catch((err) => {
+            console.log(err);
+            setAuthError("ログインに失敗しました")
+        });
     }
 
     const onSubmit = (event: any): void => {
@@ -38,6 +52,7 @@ export default function Page() {
                 >
                     <Typography component="h1" variant="h5">ログイン</Typography>
                     <Box component="form" onSubmit={handleSubmit(onSubmit)}>
+                        {authError && <Typography variant="body2" color="error">{authError}</Typography>}{""}
                         <TextField
                             type="text"
                             id="username"
@@ -73,7 +88,7 @@ export default function Page() {
                                     message: "パスワードは必須です",
                                 },
                                 minLength: {
-                                    value: 8,
+                                    value: 4,
                                     message: "パスワードは8文字以上です"
                                 },
                             })

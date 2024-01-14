@@ -8,8 +8,8 @@ const nextConfig = {
         return [
             {
                 permanent: true,
-                source: '/api/:slug*',
-                destination: 'http://host.docker.internal:8000/api/:slug*',
+                source: '/api/:path*',
+                destination: 'http://host.docker.internal:8000/api/:path*/',
             },
         ]
     },
