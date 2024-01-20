@@ -2,11 +2,12 @@
 
 import React, { useState, useEffect } from "react";
 import { set, useForm } from "react-hook-form";
-import booksData from "./mock/dummy_books.json";
 import Link from "next/link";
 import { Alert, AlertColor, Box, Button, Paper, Snackbar, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
 import { Add } from "@mui/icons-material";
 import { useRouter } from "next/navigation";
+import axios from "../../plugins/axios";
+// import axios from "axios";
 
 type Book = {
     id: number | null
@@ -40,8 +41,14 @@ export default function Page() {
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
     useEffect(() => {
-        return setBooks(booksData);
-    }, []);
+        console.log(document.cookie.split(';'));
+        axios.get("/api/books")
+        .then((res) => res.data)
+        .then((data) => {
+            console.log(data);
+            setBooks(data);
+        });
+    }, [isSnackbarOpened]);
 
     // イベントハンドラ
     const onSubmit = (event: any): void => {

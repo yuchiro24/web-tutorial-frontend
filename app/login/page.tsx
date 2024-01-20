@@ -1,10 +1,10 @@
 'use client';
 
-import { Box, Button, CssBaseline, Divider, TextField, ThemeProvider, Typography, createTheme } from "@mui/material";
+import { Box, Button, CssBaseline, TextField, ThemeProvider, Typography, createTheme } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import axios from "axios";
+import axios from "../../plugins/axios";
 
 type FormData = {
     username: string
@@ -23,9 +23,11 @@ export default function Page() {
         .then((res) => {
             console.log(res.data);
             if (res.data.error) {
+                console.log(res.data.error);
                 setAuthError(res.data.error);
             } else {
                 setAuthError("");
+                console.log(document.cookie.split(";"));
                 router.push("/books");
             }
         }
